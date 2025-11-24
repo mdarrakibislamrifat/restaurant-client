@@ -62,7 +62,7 @@ const TeamMembers = () => {
               </div>
 
               <div className="p-4 w-full">
-                <h3 className="text-base text-gray-900 font-bold">
+                <h3 className="text-base text-gray-900 font-semibold">
                   {member.name}
                 </h3>
                 <p className="text-gray-500 text-xs mt-1">{member.role}</p>
