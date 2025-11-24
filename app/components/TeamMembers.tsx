@@ -51,7 +51,7 @@ const TeamMembers = () => {
               key={index}
               className="bg-white rounded-lg shadow-xl overflow-hidden flex flex-col items-center text-center"
             >
-              <div className="w-full aspect-[4/5] relative">
+              <div className="w-full aspect-4/5 relative">
                 <Image
                   src={member.image}
                   alt={member.name}
