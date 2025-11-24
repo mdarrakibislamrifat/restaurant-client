@@ -90,28 +90,19 @@ export default function Footer() {
             <h3 className="text-lg font-bold mb-6">Contact us</h3>
             <div className="space-y-4 text-sm">
               <div className="flex gap-3">
-                <MapPin
-                  size={20}
-                  className="flex-shrink-0 text-red-200 mt-0.5"
-                />
+                <MapPin size={20} className=" text-red-200 mt-0.5" />
                 <p>3517 W. Gray St. Utica, Pennsylvania 57867</p>
               </div>
               <div className="flex gap-3">
-                <Phone
-                  size={20}
-                  className="flex-shrink-0 text-red-200 mt-0.5"
-                />
+                <Phone size={20} className=" text-red-200 mt-0.5" />
                 <p>(480) 555-0103</p>
               </div>
               <div className="flex gap-3">
-                <Mail size={20} className="flex-shrink-0 text-red-200 mt-0.5" />
+                <Mail size={20} className=" text-red-200 mt-0.5" />
                 <p>M.Alyaqout@4house.Co</p>
               </div>
               <div className="flex gap-3">
-                <Clock
-                  size={20}
-                  className="flex-shrink-0 text-red-200 mt-0.5"
-                />
+                <Clock size={20} className=" text-red-200 mt-0.5" />
                 <p>Sun - Sat / 10:00 AM - 8:00 PM</p>
               </div>
             </div>
