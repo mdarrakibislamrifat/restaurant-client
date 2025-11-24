@@ -12,15 +12,16 @@ import {
   Youtube,
   PinIcon,
 } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   const galleryImages = [
-    "/delicious-burger-with-golden-fries.jpg",
-    "/fresh-pasta-dish-with-herbs.jpg",
-    "/cooking-pan-with-pizza.jpg",
-    "/grilled-fish-on-plate.jpg",
-    "/colorful-salad-bowl.jpg",
-    "/restaurant-interior-dining.jpg",
+    "/delicious-burger-with-golden-fries.png",
+    "/fresh-pasta-dish-with-herbs.png",
+    "/cooking-pan-with-pizza.png",
+    "/grilled-fish-on-plate.png",
+    "/colorful-salad-bowl.png",
+    "/restaurant-interior-dining.png",
   ];
 
   const socialLinks = [
@@ -40,7 +41,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-red-800 text-white">
+    <footer className="bg-[#880808] text-white">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
@@ -50,17 +51,20 @@ export default function Footer() {
             <p className="text-sm text-red-100 mb-6">
               Subscribe our newsletter and get discount 25%off
             </p>
-            <div className="flex gap-2">
+            <div className="relative max-w-md">
               <input
                 type="email"
                 placeholder="Enter Your Email"
-                className="bg-white text-gray-900 placeholder:text-gray-500 border-0 rounded-sm"
+                className="w-[90%] h-14 pl-6 pr-14 text-gray-800 bg-white rounded-l-md focus:outline-none focus:ring-2 focus:ring-white/50 placeholder:text-gray-400 text-base "
               />
               <button
-                className="bg-white text-red-800 hover:bg-red-50 px-3 rounded-sm"
-                size="icon"
+                className="absolute right-0 top-0 h-14 w-14 bg-[#A52A2A] rounded-r-md flex items-center justify-center transition-colors group"
+                aria-label="Subscribe"
               >
-                <Send size={18} />
+                <Send
+                  size={20}
+                  className="text-white group-hover:scale-110 transition-transform"
+                />
               </button>
             </div>
             {/* Social Links */}
@@ -116,7 +120,7 @@ export default function Footer() {
           {/* Links Section */}
           <div>
             <h3 className="text-lg font-bold mb-6">Links</h3>
-            <ul className="space-y-3 text-sm">
+            <ul className="flex flex-row text-sm gap-4 sm:flex-col">
               {navLinks.map((link) => (
                 <li key={link.label}>
                   <a
@@ -139,9 +143,11 @@ export default function Footer() {
                   key={index}
                   className="aspect-square rounded-sm overflow-hidden border-2 border-red-600 hover:border-white transition-colors"
                 >
-                  <img
+                  <Image
                     src={image || "/placeholder.svg"}
                     alt={`Gallery image ${index + 1}`}
+                    width={109}
+                    height={109}
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                   />
                 </div>
@@ -149,12 +155,12 @@ export default function Footer() {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Divider */}
-        <div className="border-t border-red-700"></div>
+      {/* Bottom Footer */}
 
-        {/* Bottom Footer */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-6 text-sm text-red-100">
+      <div className="bg-[#A52A2A] p-5">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between  gap-4  text-red-100">
           <p>&copy; Copyright © 2025. All rights reserved</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-white transition-colors">
