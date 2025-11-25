@@ -1,3 +1,4 @@
+import CustomerFeedback from "../components/CustomerFeedback";
 import DishSeller from "../components/DishSeller";
 import Footer from "../components/Footer";
 import Partner from "../components/Partner";
@@ -7,6 +8,7 @@ const HomePage = () => {
   return (
     <div>
       <DishSeller />
+      <CustomerFeedback />
       <TeamMembers />
       <Partner />
       <Footer />
