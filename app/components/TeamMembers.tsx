@@ -44,7 +44,7 @@ const TeamMembers = () => {
         </div>
       </div>
 
-      <div className="w-full max-w-6xl mx-auto px-4">
+      <div className="w-full max-w-7xl mx-auto px-4">
         <div className="relative z-20 -mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {teamMembers.map((member, index) => (
             <div
