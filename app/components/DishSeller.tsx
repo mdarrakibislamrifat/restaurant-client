@@ -117,25 +117,6 @@ const DishSeller = () => {
         setIsFoodModalOpen(false);
     };
 
-    // Save handler for Add Category
-    const handleSaveCategory = () => {
-        if (!newCategoryName.trim()) {
-            alert("Please enter a category name.");
-            return;
-        }
-        // Check if category already exists
-        if (categoryList.some((cat) => cat.name.toLowerCase() === newCategoryName.trim().toLowerCase())) {
-            alert("Category already exists.");
-            return;
-        }
-        const newCategory: Category = {
-            _id: String(Date.now()),
-            name: newCategoryName.trim(),
-        };
-        setCategoryList((prev) => [...prev, newCategory]);
-        setNewCategoryName("");
-        setIsCategoryModalOpen(false);
-    };
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-12 font-sans">
@@ -231,9 +212,17 @@ const DishSeller = () => {
                 isOpen={isFoodModalOpen}
                 onClose={() => setIsFoodModalOpen(false)}
                 onSave={(food) => {
-                    setDishes(prev => [{ _id: String(Date.now()), ...food, category: { _id: "temp", name: food.category } }, ...prev]);
+
+                    const categoryObj = categoryList.find(cat => cat._id === food.category) || { _id: "unknown", name: "Uncategorized" };
+
+                    setDishes(prev => [
+                        { _id: String(Date.now()), ...food, category: categoryObj },
+                        ...prev
+                    ]);
+
                     setIsFoodModalOpen(false);
                 }}
+
             />
 
             {/* Add Category Modal */}

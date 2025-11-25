@@ -37,9 +37,9 @@ const AddCategoryModal: React.FC<AddCategoryModalProps> = ({ isOpen, onClose, on
             const data = await response.json();
 
             if (data.success) {
-                onSave(data.data); // update parent state with new category
+                onSave(data.data);
                 setNewCategoryName("");
-                onClose(); // close modal after saving
+                onClose();
             } else {
                 alert("Failed to add category. Try again!");
             }
