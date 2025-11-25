@@ -65,27 +65,44 @@ const AddFoodModal: React.FC<AddFoodModalProps> = ({ isOpen, onClose, onSave }) 
 
         setLoading(true);
 
+        const CLOUD_NAME = "di83h3jzy";
+
         try {
-            // Upload image to ImgBB
+            // 2. Upload image to Cloudinary
             const formData = new FormData();
-            formData.append("image", foodImage as File);
-
-            const imgbbRes = await fetch(
-                "https://api.imgbb.com/1/upload?expiration=600&key=88e8bf47ca7f0b57f5f0ded72ecb1662",
-                { method: "POST", body: formData }
+            formData.append("file", foodImage as File);
+            formData.append("upload_preset", "restaurant");
+            const cloudinaryRes = await fetch(
+                `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, // 🔥 CORRECTED Cloud Name
+                {
+                    method: "POST",
+                    body: formData,
+                }
             );
-            const imgbbData = await imgbbRes.json();
-            const imageUrl = imgbbData.data.url;
 
-            // Find category _id
-            const selectedCategory = categories.find(cat => cat._id === foodCategory || cat.name === foodCategory);
+
+            if (!cloudinaryRes.ok) {
+                const errorData = await cloudinaryRes.json();
+                console.error("Cloudinary Upload Failed:", errorData);
+                alert("Image upload failed. Please ensure the Cloud Name and Preset are correct.");
+                setLoading(false);
+                return;
+            }
+
+            const cloudinaryData = await cloudinaryRes.json();
+            const imageUrl = cloudinaryData.secure_url;
+
+
+            const selectedCategory = categories.find(
+                (cat) => cat._id === foodCategory || cat.name === foodCategory
+            );
             if (!selectedCategory) {
                 alert("Invalid category selected.");
                 setLoading(false);
                 return;
             }
 
-            // POST to backend with default rating 5
+
             const res = await fetch("https://restaurant-backend-antopolis.vercel.app/api/products", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -93,7 +110,7 @@ const AddFoodModal: React.FC<AddFoodModalProps> = ({ isOpen, onClose, onSave }) 
                     name: foodName,
                     category: selectedCategory._id,
                     price: priceNum,
-                    rating: 5, // always 5
+                    rating: 5,
                     image: imageUrl,
                 }),
             });
@@ -101,6 +118,7 @@ const AddFoodModal: React.FC<AddFoodModalProps> = ({ isOpen, onClose, onSave }) 
             const data = await res.json();
             if (data.success) {
                 onSave(data.data);
+
                 setFoodName("");
                 setFoodCategory("");
                 setFoodPrice("");
@@ -108,15 +126,16 @@ const AddFoodModal: React.FC<AddFoodModalProps> = ({ isOpen, onClose, onSave }) 
                 setFoodImagePreview("");
                 onClose();
             } else {
-                alert("Failed to add food.");
+                alert("Failed to add food: " + (data.message || "Unknown server error."));
             }
         } catch (err) {
             console.error(err);
-            alert("Something went wrong!");
+            alert("Something went wrong during the save process!");
         } finally {
             setLoading(false);
         }
     };
+
 
 
     if (!isOpen) return null;

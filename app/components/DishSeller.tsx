@@ -161,7 +161,7 @@ const DishSeller = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {loading ? (
-                    <div className="text-center py-12 text-gray-700 text-lg">Loading Menu...</div>
+                    <div className="text-center py-12 text-gray-700 text-lg">Loading Food...</div>
                 ) : filteredDishes.length === 0 ? (
                     <p className="col-span-full text-center text-gray-500 py-10 border-2 border-dashed border-gray-200 rounded-lg">
                         No dishes found in {activeCategory}.
